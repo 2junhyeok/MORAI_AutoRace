@@ -1,0 +1,21 @@
+
+cd ~/ros_edu_ws
+catkin_make
+source devel/setup.bash
+roslaunch rosbridge_server rosbridge_websocket.launch
+센서 코어 끄기
+
+
+cd ~/ros_edu_ws/src/my_morai_pkg/scripts
+touch ego_node.py
+chmod +x ego_node.py
+gedit ego_node.py
+
+
+cd ~/ros_edu_ws
+catkin_make
+source devel/setup.bash
+
+rosrun my_morai_pkg motor_node.py
+
+

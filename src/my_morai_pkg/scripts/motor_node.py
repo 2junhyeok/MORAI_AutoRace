@@ -118,7 +118,8 @@ class CameraViewer:
         combined = cv2.bitwise_or(mask_wh,
                     cv2.bitwise_or(mask_cn, mask_sb))
         ker = np.ones((5,5),np.uint8)
-        combined = cv2.morphologyEx(combined, cv2.MORPH_CLOSE, ker)
+        ker_big = cv2.getStructuringElement(cv2.MORPH_RECT, (25,5))
+        combined = cv2.morphologyEx(combined, cv2.MORPH_CLOSE, ker_big)
         combined = cv2.morphologyEx(combined, cv2.MORPH_OPEN,  ker)
         hker = cv2.getStructuringElement(cv2.MORPH_RECT,(15,3))
         combined = cv2.morphologyEx(combined, cv2.MORPH_CLOSE, hker)
@@ -129,7 +130,7 @@ class CameraViewer:
         mid = w_r//2
         leftx  = np.argmax(hist[:mid])
         rightx = np.argmax(hist[mid:]) + mid
-        nw, margin, minpix = 9, 100, 50
+        nw, margin, minpix = 9, 120, 20
         window_h = combined.shape[0]//nw
         ys, xs = combined.nonzero()
         lc, rc = leftx, rightx
